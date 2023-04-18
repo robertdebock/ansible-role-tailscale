@@ -13,8 +13,6 @@ molecule:
   parallel:
     matrix:
       - image: "amazonlinux"
-        tag: "1"
-      - image: "amazonlinux"
         tag: "latest"
       - image: "debian"
         tag: "latest"
