@@ -35,7 +35,6 @@
 
 - name: Add tailscale repository (zypper)
   community.general.zypper_repository:
-    name: tailscale-stable
     repo: "https://pkgs.tailscale.com/stable/opensuse/leap/15.2/tailscale.repo"
   when:
     - ansible_pkg_mgr == "zypper"
