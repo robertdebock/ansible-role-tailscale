@@ -10,14 +10,13 @@ _tailscale_dependencies:
 tailscale_dependencies: "{{ _tailscale_dependencies[ansible_os_family] | default(_tailscale_dependencies['default']) }}"
 
 _tailscale_repo_baseurl:
-  Amazon: "https://pkgs.tailscale.com/stable/amazon-linux/2/tailscale.repo"
+  Amazon: "https://pkgs.tailscale.com/stable/opensuse/leap/15.2/$basearch"
   Fedora: "https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }}/$basearch"
   Rocky: &tailscale_repo_baseurl_enterpriselinux "https://pkgs.tailscale.com/stable/centos/{{ ansible_distribution_major_version }}/$basearch"
   CentOS: *tailscale_repo_baseurl_enterpriselinux
 tailscale_repo_baseurl: "{{ _tailscale_repo_baseurl[ansible_distribution] }}"
 
 _tailscale_repo_gpgkey:
-  Amazon: "https://pkgs.tailscale.com/stable/amazon-linux/2/repo.gpg"
   Fedora: "https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }}/repo.gpg"
   Rocky: &tailscale_repo_gpgkey_enterpriselinux "https://pkgs.tailscale.com/stable/centos/{{ ansible_distribution_major_version }}/repo.gpg"
   CentOS: *tailscale_repo_gpgkey_enterpriselinux
