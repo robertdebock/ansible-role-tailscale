@@ -13,6 +13,7 @@ _tailscale_repo_baseurl:
   Amazon: "https://pkgs.tailscale.com/stable/opensuse/leap/15.2/$basearch"
   Fedora: "https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }}/$basearch"
   Rocky: &tailscale_repo_baseurl_enterpriselinux "https://pkgs.tailscale.com/stable/centos/{{ ansible_distribution_major_version }}/$basearch"
+  openSUSE: "https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }}/leap/15.2/$basearch"
   CentOS: *tailscale_repo_baseurl_enterpriselinux
 tailscale_repo_baseurl: "{{ _tailscale_repo_baseurl[ansible_distribution] }}"
 
