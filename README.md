@@ -19,11 +19,17 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
   roles:
     - role: robertdebock.tailscale
+      # When setting the `tailscale_authkey`, a node can join automatically.
+      # In case the `tailscale_authkey` is unset, registration of the node is manual.
       # tailscale_authkey: "tskey-auth-KEY_IDENTITY-KEY_SERET_KEY_SERET_KEY_SERET_KE"
-      tailscale_exit_node: yes
-      tailscale_advertise_routes:
-        - 10.0.0.0/24
-        - 10.0.1.0/24
+      #
+      # You can request the node to publish itself as an exit node.
+      # tailscale_exit_node: yesA
+      #
+      # You can advertise certain routes to the Tailscale network.
+      # tailscale_advertise_routes:
+      #   - 10.0.0.0/24
+      #   - 10.0.1.0/24
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-tailscale/blob/master/molecule/default/prepare.yml):
