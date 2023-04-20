@@ -7,3 +7,6 @@
   roles:
     - role: ansible-role-tailscale
       tailscale_exit_node: yes
+      tailscale_advertise_routes:
+        - 10.0.0.0/24
+        - 10.0.1.0/24

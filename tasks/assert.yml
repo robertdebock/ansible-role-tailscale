@@ -13,3 +13,10 @@
       - tailscale_authkey is defined
       - tailscale_authkey is string
     quiet: yes
+
+- name: Test if tailscale_advertise_routes is set correctly
+  ansible.builtin.assert:
+    that:
+      - tailscale_advertise_routes is defined
+      - tailscale_advertise_routes is iterable
+    quiet: yes
