@@ -6,6 +6,7 @@
 
   roles:
     - role: ansible-role-tailscale
+      # tailscale_authkey: "tskey-auth-KEY_IDENTITY-KEY_SERET_KEY_SERET_KEY_SERET_KE"
       tailscale_exit_node: yes
       tailscale_advertise_routes:
         - 10.0.0.0/24

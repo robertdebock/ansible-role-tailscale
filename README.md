@@ -19,7 +19,11 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
   roles:
     - role: robertdebock.tailscale
+      # tailscale_authkey: "tskey-auth-KEY_IDENTITY-KEY_SERET_KEY_SERET_KEY_SERET_KE"
       tailscale_exit_node: yes
+      tailscale_advertise_routes:
+        - 10.0.0.0/24
+        - 10.0.1.0/24
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-tailscale/blob/master/molecule/default/prepare.yml):
@@ -48,6 +52,9 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 # You can configure your tailscale node to act as an exit node.
 # Enabling this, sets the required sysctl settings and adds a firewalld rule.
 tailscale_exit_node: no
+
+# To route traffice for certain subnets through tailscale, add them here.
+tailscale_advertise_routes: []
 
 # Nodes can authenticate with the tailscale service using an authkey.
 # These keys can be created here: https://login.tailscale.com/admin/settings/keys
