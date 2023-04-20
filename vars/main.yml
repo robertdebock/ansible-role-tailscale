@@ -7,6 +7,8 @@ _tailscale_dependencies:
     - yum-utils
   Debian:
     - ca-certificates
+  Suse:
+    - python3-rpm
 tailscale_dependencies: "{{ _tailscale_dependencies[ansible_os_family] | default(_tailscale_dependencies['default']) }}"
 
 _tailscale_repo_baseurl:
@@ -40,3 +42,8 @@ _tailscale_sysctl_packages:
     - procps-ng
 
 tailscale_sysclt_packages: "{{ _tailscale_sysctl_packages[ansible_os_family] | default(_tailscale_sysctl_packages['default']) }}"
+
+_tailscale_up_command:
+  yes: tailscale up --authkey {{ tailscale_authkey }} --advertise-exit-node
+  no: tailscale up --authkey {{ tailscale_authkey }}
+tailscale_up_command: "{{ _tailscale_up_command[tailscale_exit_node] }}"
