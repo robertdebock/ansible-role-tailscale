@@ -6,4 +6,5 @@
 tailscale_exit_node: no
 
 # Nodes can authenticate with the tailscale service using an authkey.
+# These keys can be created here: https://login.tailscale.com/admin/settings/keys
 tailscale_authkey: ""

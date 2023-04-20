@@ -48,6 +48,10 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 # You can configure your tailscale node to act as an exit node.
 # Enabling this, sets the required sysctl settings and adds a firewalld rule.
 tailscale_exit_node: no
+
+# Nodes can authenticate with the tailscale service using an authkey.
+# These keys can be created here: https://login.tailscale.com/admin/settings/keys
+tailscale_authkey: ""
 ```
 
 ## [Requirements](#requirements)
