@@ -10,7 +10,6 @@
     name: tailscale-stable
     description: Tailscale stable
     baseurl: "{{ tailscale_repo_baseurl }}"
-    enabled: yes
     gpgcheck: no
     repo_gpgcheck: yes
     gpgkey: "{{ tailscale_repo_gpgkey }}"
@@ -31,7 +30,6 @@
       ansible.builtin.apt_repository:
         repo: "{{ tailscale_apt_repo }}"
         filename: tailscale
-        update_cache: yes
 
 - name: Add tailscale repository (zypper)
   community.general.zypper_repository:
@@ -66,7 +64,6 @@
       ansible.posix.sysctl:
         name: "{{ item }}"
         value: "1"
-        reload: yes
         sysctl_file: "{{ tailscale_sysctl_file }}"
       loop:
         - net.ipv4.ip_forward
