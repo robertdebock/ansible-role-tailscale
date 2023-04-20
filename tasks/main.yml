@@ -82,3 +82,18 @@
         permanent: true
       when:
         - "'firewalld' in ansible_facts.packages"
+
+- name: Check tailscale status
+  ansible.builtin.command:
+    cmd: tailscale status
+  register: tailscale_status
+  changed_when: no
+  failed_when: no
+
+- name: Run tailscale up
+  ansible.builtin.command:
+    cmd: "{{ tailscale_up_command }}"
+  changed_when: yes
+  when:
+    - "'Logged out.' in tailscale_status.stdout"
+    - tailscale_authkey != ""

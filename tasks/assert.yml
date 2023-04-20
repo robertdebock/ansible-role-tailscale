@@ -1,0 +1,6 @@
+- name: Test if tailscale_authkey is set correctly
+  ansible.builtin.assert:
+    that:
+      - tailscale_authkey is defined
+      - tailscale_authkey is string
+    quiet: yes
