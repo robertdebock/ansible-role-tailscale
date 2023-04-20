@@ -77,6 +77,8 @@
         masquerade: yes
         state: enabled
         permanent: true
+      notify:
+        - Restart firewalld
       when:
         - "'firewalld' in ansible_facts.packages"
 
@@ -88,8 +90,18 @@
   failed_when: no
 
 - name: Run tailscale up
+  when:
+    - "'Logged out.' in tailscale_status.stdout"
+    - tailscale_authkey != ""
   block:
     - name: Run tailscale up with authkey
+      ansible.builtin.command:
+        cmd: "{{ tailscale_up_command }}"
+      changed_when: yes
+      when:
+        - tailscale_advertise_routes is not defined or
+          tailscale_advertise_routes | length == 0
+
     - name: Run tailscale up with advertised routes
       ansible.builtin.command:
         cmd: "{{ tailscale_up_command }} --advertise-routes={{ tailscale_advertise_routes | join(',') }}"
