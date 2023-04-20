@@ -32,7 +32,6 @@ tailscale_apt_repo: deb [signed-by=/usr/share/keyrings/tailscale-archive-keyring
 _tailscale_sysclt_file:
   false: /etc/sysctl.conf
   true: /etc/sysctl.d/99-tailscale.conf
-
 tailscale_sysctl_file: "{{ _tailscale_sysclt_file[tailscale_sysctl_d.stat.exists] }}"
 
 _tailscale_sysctl_packages:
@@ -40,7 +39,6 @@ _tailscale_sysctl_packages:
     - procps
   RedHat:
     - procps-ng
-
 tailscale_sysclt_packages: "{{ _tailscale_sysctl_packages[ansible_os_family] | default(_tailscale_sysctl_packages['default']) }}"
 
 _tailscale_up_command:
