@@ -1,0 +1,14 @@
+---
+# handlers file for tailscale
+
+- name: Add firewall forward
+  ansible.builtin.command:
+    cmd: firewalld-cmd --permanent --add-forward
+  changed_when: yes
+  when:
+    - "'firewalld' in ansible_facts.packages"
+
+- name: Restart firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: restarted
