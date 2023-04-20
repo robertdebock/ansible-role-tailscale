@@ -4,7 +4,7 @@ Install and configure tailscale on your system.
 
 |GitHub|GitLab|Quality|Downloads|Version|
 |------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-tailscale/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-tailscale/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-tailscale/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-tailscale)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/robertdebock/tailscale)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/robertdebock/tailscale)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-tailscale.svg)](https://github.com/robertdebock/ansible-role-tailscale/releases/)|
+|[![github](https://github.com/robertdebock/ansible-role-tailscale/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-tailscale/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-tailscale/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-tailscale)|[![quality](https://img.shields.io/ansible/quality/62034)](https://galaxy.ansible.com/robertdebock/tailscale)|[![downloads](https://img.shields.io/ansible/role/d/62034)](https://galaxy.ansible.com/robertdebock/tailscale)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-tailscale.svg)](https://github.com/robertdebock/ansible-role-tailscale/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -19,6 +19,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
   roles:
     - role: robertdebock.tailscale
+      tailscale_exit_node: yes
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-tailscale/blob/master/molecule/default/prepare.yml):
@@ -36,6 +37,18 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
 
+## [Role Variables](#role-variables)
+
+The default values for the variables are set in [`defaults/main.yml`](https://github.com/robertdebock/ansible-role-tailscale/blob/master/defaults/main.yml):
+
+```yaml
+---
+# defaults file for tailscale
+
+# You can configure your tailscale node to act as an exit node.
+# Enabling this, sets the required sysctl settings and adds a firewalld rule.
+tailscale_exit_node: no
+```
 
 ## [Requirements](#requirements)
 

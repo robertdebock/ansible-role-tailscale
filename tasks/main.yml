@@ -48,3 +48,37 @@
     name: tailscaled
     state: started
     enabled: true
+
+- name: Modify settings for the exit node
+  when:
+    - tailscale_exit_node
+  block:
+    - name: Install sysctl
+      ansible.builtin.package:
+        name: "{{ tailscale_sysclt_packages }}"
+
+    - name: Check for /etc/sysctl.d
+      ansible.builtin.stat:
+        path: /etc/sysctl.d
+      register: tailscale_sysctl_d
+
+    - name: Allow forwarding in sysctl.d
+      ansible.posix.sysctl:
+        name: "{{ item }}"
+        value: "1"
+        reload: yes
+        sysctl_file: "{{ tailscale_sysctl_file }}"
+      loop:
+        - net.ipv4.ip_forward
+        - net.ipv6.conf.all.forwarding
+
+    - name: Gather the package facts
+      ansible.builtin.package_facts:
+
+    - name: Allow masquarading
+      ansible.posix.firewalld:
+        masquerade: yes
+        state: enabled
+        permanent: true
+      when:
+        - "'firewalld' in ansible_facts.packages"

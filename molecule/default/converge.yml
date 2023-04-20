@@ -6,3 +6,4 @@
 
   roles:
     - role: ansible-role-tailscale
+      tailscale_exit_node: yes
