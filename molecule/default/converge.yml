@@ -11,7 +11,7 @@
       # tailscale_authkey: "tskey-auth-KEY_IDENTITY-KEY_SERET_KEY_SERET_KEY_SERET_KE"
       #
       # You can request the node to publish itself as an exit node.
-      # tailscale_exit_node: yesA
+      # tailscale_exit_node: yes
       #
       # You can advertise certain routes to the Tailscale network.
       # tailscale_advertise_routes:
