@@ -17,3 +17,5 @@
       # tailscale_advertise_routes:
       #   - 10.0.0.0/24
       #   - 10.0.1.0/24
+      tailscale_authkey: "tskey-auth-k3rpMK7CNTRL-HgzyuzFU86QRU5EgvLok6QReBaNXtwGG"
+      tailscale_exit_node: yes
