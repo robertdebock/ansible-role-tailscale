@@ -30,8 +30,6 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       # tailscale_advertise_routes:
       #   - 10.0.0.0/24
       #   - 10.0.1.0/24
-      tailscale_authkey: "tskey-auth-k3rpMK7CNTRL-HgzyuzFU86QRU5EgvLok6QReBaNXtwGG"
-      tailscale_exit_node: yes
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-tailscale/blob/master/molecule/default/prepare.yml):
