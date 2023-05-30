@@ -50,7 +50,6 @@
   when:
     - tailscale_exit_node or
       tailscale_advertise_routes | length > 0
-
   block:
     - name: Install sysctl
       ansible.builtin.package:
