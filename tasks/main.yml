@@ -96,12 +96,18 @@
     - tailscale_authkey != ""
   block:
     - name: Run tailscale up with authkey
-      ansible.builtin.command:
-        cmd: "{{ tailscale_up_command }}"
-      changed_when: yes
       when:
         - tailscale_advertise_routes | length == 0
-
+      block:
+        - name: Run tailscale up regular
+          ansible.builtin.command:
+            cmd: "{{ tailscale_up_command }}"
+          changed_when: yes
+      rescue:
+        - name: Run tailscale up regular
+          ansible.builtin.command:
+            cmd: "{{ tailscale_up_command }} --reset"
+          changed_when: yes
     - name: Run tailscale up with advertised routes
       ansible.builtin.command:
         cmd: "{{ tailscale_up_command }} --advertise-routes={{ tailscale_advertise_routes | join(',') }}"
