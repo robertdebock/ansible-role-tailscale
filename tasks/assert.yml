@@ -12,6 +12,7 @@
     that:
       - tailscale_authkey is defined
       - tailscale_authkey is string
+      - tailscale_authkey is not none
     quiet: yes
 
 - name: assert | Test if tailscale_advertise_routes is set correctly
