@@ -31,5 +31,7 @@ galaxy_info:
     - tailscale
     - network
     - vpn
+    - networking
+    - security
 
 dependencies: []
