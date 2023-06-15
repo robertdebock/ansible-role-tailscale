@@ -104,7 +104,7 @@
             cmd: "{{ tailscale_up_command }}"
           changed_when: yes
       rescue:
-        - name: Run tailscale up regular
+        - name: Run tailscale up reset
           ansible.builtin.command:
             cmd: "{{ tailscale_up_command }} --reset"
           changed_when: yes
