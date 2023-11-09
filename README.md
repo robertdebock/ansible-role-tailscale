@@ -2,9 +2,9 @@
 
 Install and configure tailscale on your system.
 
-|GitHub|GitLab|Quality|Downloads|Version|
-|------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-tailscale/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-tailscale/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-tailscale/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-tailscale)|[![quality](https://img.shields.io/ansible/quality/62034)](https://galaxy.ansible.com/robertdebock/tailscale)|[![downloads](https://img.shields.io/ansible/role/d/62034)](https://galaxy.ansible.com/robertdebock/tailscale)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-tailscale.svg)](https://github.com/robertdebock/ansible-role-tailscale/releases/)|
+|GitHub|GitLab|Downloads|Version|
+|------|------|---------|-------|
+|[![github](https://github.com/robertdebock/ansible-role-tailscale/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-tailscale/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-tailscale/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-tailscale)|[![downloads](https://img.shields.io/ansible/role/d/24602)](https://galaxy.ansible.com/robertdebock/tailscale)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-tailscale.svg)](https://github.com/robertdebock/ansible-role-tailscale/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -105,7 +105,7 @@ The minimum version of Ansible required is 2.10, tests have been done to:
 - The current version.
 - The development version.
 
-If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-tailscale/issues)
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-tailscale/issues).
 
 ## [License](#license)
 
