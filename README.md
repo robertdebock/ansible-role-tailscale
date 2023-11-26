@@ -1,4 +1,4 @@
-# Ansible role [tailscale](#tailscale)
+# [Ansible role tailscale](#tailscale)
 
 Install and configure tailscale on your system.
 
