@@ -92,7 +92,7 @@
 
 - name: Run tailscale up
   when:
-    - "'not logged in' in tailscale_status.stdout"
+    - "'Logged out.' in tailscale_status.stdout"
     - tailscale_authkey != ""
   block:
     - name: Run tailscale up with authkey
