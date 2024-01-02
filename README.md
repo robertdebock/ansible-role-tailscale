@@ -4,7 +4,7 @@ Install and configure tailscale on your system.
 
 |GitHub|GitLab|Downloads|Version|
 |------|------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-tailscale/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-tailscale/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-tailscale/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-tailscale)|[![downloads](https://img.shields.io/ansible/role/d/24602)](https://galaxy.ansible.com/robertdebock/tailscale)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-tailscale.svg)](https://github.com/robertdebock/ansible-role-tailscale/releases/)|
+|[![github](https://github.com/robertdebock/ansible-role-tailscale/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-tailscale/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-tailscale/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-tailscale)|[![downloads](https://img.shields.io/ansible/role/d/robertdebock/tailscale)](https://galaxy.ansible.com/robertdebock/tailscale)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-tailscale.svg)](https://github.com/robertdebock/ansible-role-tailscale/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
