@@ -17,3 +17,6 @@
       # tailscale_advertise_routes:
       #   - 10.0.0.0/24
       #   - 10.0.1.0/24
+      #
+      # You can give hosts a specific name:
+      # tailscale_hostname: some_hostname
