@@ -33,6 +33,7 @@
 - name: Add tailscale repository (zypper)
   community.general.zypper_repository:
     repo: "{{ tailscale_repo_baseurl }}"
+    auto_import_keys: true
   when:
     - ansible_pkg_mgr in [ "zypper" ]
 
