@@ -5,14 +5,21 @@
   ansible.builtin.package:
     name: "{{ tailscale_dependencies }}"
 
+- name: Import Tailscale RPM key
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ tailscale_repo_gpgkey }}"
+  when:
+    - ansible_pkg_mgr in [ "yum", "dnf", "zypper" ]
+
 - name: Add the Tailscale repository (yum/dnf)
   ansible.builtin.yum_repository:
     name: tailscale-stable
     description: Tailscale stable
     baseurl: "{{ tailscale_repo_baseurl }}"
-    gpgcheck: false
-    repo_gpgcheck: true
-    gpgkey: "{{ tailscale_repo_gpgkey }}"
+    # gpgcheck: false
+    # repo_gpgcheck: true
+    # gpgkey: "{{ tailscale_repo_gpgkey }}"
   when:
     - ansible_pkg_mgr in [ "yum", "dnf" ]
 
@@ -34,11 +41,6 @@
   when:
     - ansible_pkg_mgr in [ "zypper" ]
   block:
-    - name: Import Tailscale RPM key
-      ansible.builtin.rpm_key:
-        state: present
-        key: "{{ tailscale_repo_gpgkey }}"
-
     - name: Add tailscale repository (zypper)
       community.general.zypper_repository:
         repo: "{{ tailscale_repo_baseurl }}"
