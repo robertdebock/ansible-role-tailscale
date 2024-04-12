@@ -17,9 +17,7 @@
     name: tailscale-stable
     description: Tailscale stable
     baseurl: "{{ tailscale_repo_baseurl }}"
-    # gpgcheck: false
-    # repo_gpgcheck: true
-    # gpgkey: "{{ tailscale_repo_gpgkey }}"
+    gpgkey: "{{ tailscale_repo_gpgkey }}"
   when:
     - ansible_pkg_mgr in [ "yum", "dnf" ]
 
