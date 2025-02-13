@@ -4,23 +4,19 @@
   become: true
   gather_facts: true
 
-  tasks:
-    - name: "Include role"
-      ansible.builtin.include_role:
-        name: "ansible-role-tailscale"
-  # roles:
-  #   - role: ansible-role-tailscale
-  #     # When setting the `tailscale_authkey`, a node can join automatically.
-  #     # In case the `tailscale_authkey` is unset, registration of the node is manual.
-  #     tailscale_authkey: "tskey-auth-KEY_IDENTITY-KEY_SERET_KEY_SERET_KEY_SERET_KE"
+  roles:
+    - role: ansible-role-tailscale
+      # When setting the `tailscale_authkey`, a node can join automatically.
+      # In case the `tailscale_authkey` is unset, registration of the node is manual.
+      tailscale_authkey: "tskey-auth-KEY_IDENTITY-KEY_SERET_KEY_SERET_KEY_SERET_KE"
 
-  #     # You can request the node to publish itself as an exit node.
-  #     tailscale_exit_node: true
+      # You can request the node to publish itself as an exit node.
+      tailscale_exit_node: true
 
-  #     # You can advertise certain routes to the Tailscale network.
-  #     tailscale_advertise_routes:
-  #       - 10.0.0.0/24
-  #       - 10.0.1.0/24
+      # You can advertise certain routes to the Tailscale network.
+      tailscale_advertise_routes:
+        - 10.0.0.0/24
+        - 10.0.1.0/24
 
-  #     You can give hosts a specific name:
-  #     tailscale_hostname: some_hostname
+      You can give hosts a specific name:
+      tailscale_hostname: some_hostname
