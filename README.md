@@ -32,7 +32,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         - 10.0.1.0/24
 
       # You can give hosts a specific name:
-      tailscale_hostname: some_hostname.example.com
+      # tailscale_hostname: some_hostname.example.com
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-tailscale/blob/master/molecule/default/prepare.yml):

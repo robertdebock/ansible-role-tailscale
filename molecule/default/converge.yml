@@ -19,4 +19,4 @@
         - 10.0.1.0/24
 
       # You can give hosts a specific name:
-      tailscale_hostname: some_hostname.example.com
+      # tailscale_hostname: some_hostname.example.com
