@@ -8,7 +8,7 @@
     - role: ansible-role-tailscale
       # When setting the `tailscale_authkey`, a node can join automatically.
       # In case the `tailscale_authkey` is unset, registration of the node is manual.
-      tailscale_authkey: "tskey-auth-KEY_IDENTITY-KEY_SERET_KEY_SERET_KEY_SERET_KE"
+      # tailscale_authkey: "tskey-auth-KEY_IDENTITY-KEY_SERET_KEY_SERET_KEY_SERET_KE"
 
       # You can request the node to publish itself as an exit node.
       tailscale_exit_node: true
@@ -19,4 +19,4 @@
         - 10.0.1.0/24
 
       # You can give hosts a specific name:
-      # tailscale_hostname: some_hostname.example.com
+      tailscale_hostname: some_hostname.example.com
