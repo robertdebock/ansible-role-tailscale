@@ -58,6 +58,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
+        with:
+          path: ansible-role-tailscale
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -71,13 +73,20 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install tox tox-gh-actions ansible-lint molecule molecule-plugins[docker] ansible-core
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          if [ -f requirements.yml ]; then ansible-galaxy install -r requirements.yml; fi
+          if [ -f ansible-role-tailscale/requirements.txt ]; then pip install -r ansible-role-tailscale/requirements.txt; fi
+          if [ -f ansible-role-tailscale/requirements.yml ]; then ansible-galaxy install -r ansible-role-tailscale/requirements.yml; fi
+
+          # Create proper role directory structure for molecule
+          mkdir -p ~/.ansible/roles
+          ln -s ${GITHUB_WORKSPACE}/ansible-role-tailscale ~/.ansible/roles/robertdebock.tailscale
 
       - name: Test with molecule
-        run: molecule test
+        run: |
+          cd ansible-role-tailscale
+          molecule test
         env:
           PY_COLORS: 1
           ANSIBLE_FORCE_COLOR: 1
+          ANSIBLE_ROLES_PATH: ~/.ansible/roles:${GITHUB_WORKSPACE}/ansible-role-tailscale
           image: ${{ matrix.distro.image }}
           tag: ${{ matrix.distro.tag }}
