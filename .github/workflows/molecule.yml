@@ -15,23 +15,22 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v4
       - name: ansible-lint
         uses: ansible-community/ansible-lint-action@main
 
-  python-3-9:
+  molecule:
     needs:
       - lint
-    runs-on: ubuntu-20.04
-    container:
-      image: python:3.9
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        config:
+        python-version: ["3.9", "3.10", "3.13"]
+        distro:
           - image: "amazonlinux"
             tag: "latest"
           - image: "debian"
@@ -50,99 +49,32 @@ jobs:
             tag: "jammy"
           - image: "ubuntu"
             tag: "focal"
+        exclude:
+          # Exclude Amazon Linux from Python 3.13 tests
+          - python-version: "3.13"
+            distro:
+              image: "amazonlinux"
+              tag: "latest"
     steps:
       - name: checkout
         uses: actions/checkout@v4
 
-      - name: molecule
-        run: |
-          apt-get update -qq
-          apt-get -y -qq install yamllint docker.io
-          pip install --no-cache-dir tox
-          if [ -f tox.ini ] ; then tox ; fi
-          if [ ! -f tox.ini ] ; then pip install -r requirements.yml ; pip install ansible-lint ansible-core ; molecule test ; fi
-        env:
-          image: ${{ matrix.config.image }}
-          tag: ${{ matrix.config.tag }}
-  python-3-10:
-    needs:
-      - lint
-    runs-on: ubuntu-20.04
-    container:
-      image: python:3.10
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - image: "amazonlinux"
-            tag: "latest"
-          - image: "debian"
-            tag: "latest"
-          - image: "debian"
-            tag: "bullseye"
-          - image: "enterpriselinux"
-            tag: "latest"
-          - image: "fedora"
-            tag: "38"
-          - image: "fedora"
-            tag: "39"
-          - image: "ubuntu"
-            tag: "latest"
-          - image: "ubuntu"
-            tag: "jammy"
-          - image: "ubuntu"
-            tag: "focal"
-    steps:
-      - name: checkout
-        uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
 
-      - name: molecule
+      - name: Install dependencies
         run: |
-          apt-get update -qq
-          apt-get -y -qq install yamllint docker.io
-          pip install --no-cache-dir tox
-          if [ -f tox.ini ] ; then tox ; fi
-          if [ ! -f tox.ini ] ; then pip install -r requirements.yml ; pip install ansible-lint ansible-core ; molecule test ; fi
-        env:
-          image: ${{ matrix.config.image }}
-          tag: ${{ matrix.config.tag }}
-  python-3-13:
-    needs:
-      - lint
-    runs-on: ubuntu-20.04
-    container:
-      image: python:3.13
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - image: "debian"
-            tag: "latest"
-          - image: "debian"
-            tag: "bullseye"
-          - image: "enterpriselinux"
-            tag: "latest"
-          - image: "fedora"
-            tag: "38"
-          - image: "fedora"
-            tag: "39"
-          - image: "ubuntu"
-            tag: "latest"
-          - image: "ubuntu"
-            tag: "jammy"
-          - image: "ubuntu"
-            tag: "focal"
-    steps:
-      - name: checkout
-        uses: actions/checkout@v4
+          python -m pip install --upgrade pip
+          pip install tox tox-gh-actions ansible-lint molecule molecule-plugins[docker] ansible-core
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements.yml ]; then ansible-galaxy install -r requirements.yml; fi
 
-      - name: molecule
-        run: |
-          apt-get update -qq
-          apt-get -y -qq install yamllint docker.io
-          pip install --no-cache-dir tox
-          if [ -f tox.ini ] ; then tox ; fi
-          if [ ! -f tox.ini ] ; then pip install -r requirements.yml ; pip install ansible-lint ansible-core ; molecule test ; fi
+      - name: Test with molecule
+        run: molecule test
         env:
-          image: ${{ matrix.config.image }}
-          tag: ${{ matrix.config.tag }}
+          PY_COLORS: 1
+          ANSIBLE_FORCE_COLOR: 1
+          image: ${{ matrix.distro.image }}
+          tag: ${{ matrix.distro.tag }}

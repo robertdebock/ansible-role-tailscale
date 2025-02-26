@@ -7,7 +7,6 @@ dependency:
   options:
     role-file: requirements.yml
     requirements-file: requirements.yml
-    roles-path: ../../
 lint: |
   set -e
   yamllint .
