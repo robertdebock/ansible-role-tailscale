@@ -5,7 +5,7 @@
   gather_facts: true
 
   roles:
-    - role: ansible-role-tailscale
+    - role: tailscale
       # When setting the `tailscale_authkey`, a node can join automatically.
       # In case the `tailscale_authkey` is unset, registration of the node is manual.
       # tailscale_authkey: "tskey-auth-KEY_IDENTITY-KEY_SERET_KEY_SERET_KEY_SERET_KE"
