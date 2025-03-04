@@ -82,7 +82,7 @@ jobs:
 
           # Create proper role directory structure for molecule
           mkdir -p ~/.ansible/roles
-          ln -s ${GITHUB_WORKSPACE}/ansible-role-tailscale ~/.ansible/roles/tailscale
+          ln -s ${GITHUB_WORKSPACE}/ansible-role-tailscale ~/.ansible/roles/robertdebock.tailscale
 
       - name: Test with molecule
         run: |
