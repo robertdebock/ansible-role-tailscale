@@ -25,15 +25,46 @@
   when:
     - ansible_pkg_mgr in [ "apt" ]
   block:
-    - name: Add apt key
-      ansible.builtin.apt_key:
-        url: "{{ tailscale_apt_key_url }}"
-        keyring: /usr/share/keyrings/tailscale-archive-keyring.gpg
+    - name: Add tailscale repository | sources.list
+      when:
+        - (ansible_distribution == "Debian" and ansible_distribution_version is version('13', '<'))
+          or
+          (ansible_distribution == "Ubuntu" and ansible_distribution_version is version('24.04', '<'))
+      block:
+        - name: Add apt key | sources.list
+          ansible.builtin.apt_key:
+            url: "{{ tailscale_apt_key_url }}"
+            keyring: /usr/share/keyrings/tailscale-archive-keyring.gpg
 
-    - name: Add the Tailscale repository (apt)
-      ansible.builtin.apt_repository:
-        repo: "{{ tailscale_apt_repo }}"
-        filename: tailscale
+        - name: Add the Tailscale repository (apt) | sources.list
+          ansible.builtin.apt_repository:
+            repo: "{{ tailscale_apt_repo }}"
+            filename: tailscale
+          register: _deb_repository
+
+    - name: Add tailscale repository | deb822
+      when:
+        - (ansible_distribution == "Debian" and ansible_distribution_version is version('13', '>='))
+          or
+          (ansible_distribution == "Ubuntu" and ansible_distribution_version is version('24.04', '>='))
+      block:
+        - name: Add the Tailscale repository (apt) | deb822
+          ansible.builtin.deb822_repository:
+            name: tailscale
+            types: deb
+            uris: "{{ tailscale_apt_deb822_uri }}"
+            suites: '{{ ansible_distribution_release }}'
+            signed_by: "{{ tailscale_apt_key_url }}"
+            components:
+              - main
+            state: present
+          register: _deb_repository
+
+    - name: Update apt cache  # noqa: no-handler
+      ansible.builtin.apt:
+        update_cache: true
+      when:
+        - _deb_repository.changed
 
 - name: Run zypper tasks
   when:
