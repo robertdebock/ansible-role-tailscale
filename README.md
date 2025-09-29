@@ -1,4 +1,4 @@
-# [Ansible role tailscale](#tailscale)
+# [Ansible role tailscale](#ansible-role-tailscale)
 
 Install and configure tailscale on your system.
 
@@ -74,6 +74,9 @@ tailscale_hostname: "{{ ansible_hostname }}"
 
 # Whether to accept DNS settings from Tailscale. Set to false when using Pi-hole.
 tailscale_accept_dns: true
+
+# Whether to enable Tailscale SSH on this node.
+tailscale_ssh: false
 ```
 
 ## [Requirements](#requirements)
@@ -90,7 +93,7 @@ The following roles are used to prepare a system. You can prepare your system in
 
 ## [Context](#context)
 
-This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
+This role is part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
 
 Here is an overview of related roles:
 ![dependencies](https://raw.githubusercontent.com/robertdebock/ansible-role-tailscale/png/requirements.png "Dependencies")
@@ -107,13 +110,13 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |[Fedora](https://hub.docker.com/r/robertdebock/fedora)|38, 39|
 |[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
 
-The minimum version of Ansible required is 2.10, tests have been done to:
+The minimum version of Ansible required is 2.10, tests have been done on:
 
 - The previous version.
 - The current version.
 - The development version.
 
-If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-tailscale/issues).
+If you find issues, please register them on [GitHub](https://github.com/robertdebock/ansible-role-tailscale/issues).
 
 ## [License](#license)
 

@@ -35,3 +35,10 @@
       - tailscale_accept_dns is defined
       - tailscale_accept_dns is boolean
     quiet: true
+
+- name: assert | Test tailscale_ssh
+  ansible.builtin.assert:
+    that:
+      - tailscale_ssh is defined
+      - tailscale_ssh is boolean
+    quiet: true
