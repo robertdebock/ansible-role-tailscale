@@ -7,6 +7,7 @@ _tailscale_dependencies:
     - yum-utils
   Debian:
     - ca-certificates
+    - python3-debian
   Suse:
     - python3-rpm
 tailscale_dependencies: "{{ _tailscale_dependencies[ansible_os_family] | default(_tailscale_dependencies['default']) }}"
@@ -29,6 +30,7 @@ tailscale_repo_gpgkey: "{{ _tailscale_repo_gpgkey[ansible_distribution] }}"
 
 tailscale_apt_key_url: "https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }}/{{ ansible_distribution_release }}.noarmor.gpg"
 tailscale_apt_repo: "deb [signed-by=/usr/share/keyrings/tailscale-archive-keyring.gpg] https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main"
+tailscale_apt_deb822_uri: "https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }}"
 
 _tailscale_sysclt_file:
   false: /etc/sysctl.conf
