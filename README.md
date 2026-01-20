@@ -75,6 +75,9 @@ tailscale_hostname: "{{ ansible_hostname }}"
 # Whether to accept DNS settings from Tailscale. Set to false when using Pi-hole.
 tailscale_accept_dns: true
 
+# Whether to accept routes from Tailscale.
+tailscale_accept_routes: false
+
 # Whether to enable Tailscale SSH on this node.
 tailscale_ssh: false
 ```
