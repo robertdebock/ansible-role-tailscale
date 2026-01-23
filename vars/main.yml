@@ -4,13 +4,19 @@
 _tailscale_dependencies:
   default: []
   RedHat:
-    - yum-utils
+    default:
+      - yum-utils
+    10:
+      - gnupg2
+      - yum-utils
   Debian:
-    - ca-certificates
-    - python3-debian
+    default:
+      - ca-certificates
+      - python3-debian
   Suse:
-    - python3-rpm
-tailscale_dependencies: "{{ _tailscale_dependencies[ansible_os_family] | default(_tailscale_dependencies['default']) }}"
+    default:
+      - python3-rpm
+tailscale_dependencies: "{{ (_tailscale_dependencies[ansible_os_family][ansible_distribution_major_version | int] | default(_tailscale_dependencies[ansible_os_family]['default'])) | default(_tailscale_dependencies['default']) }}"
 
 _tailscale_repo_baseurl:
   Amazon: "https://pkgs.tailscale.com/stable/amazon-linux/{{ ansible_distribution_version }}/$basearch"
