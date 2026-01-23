@@ -1,8 +1,11 @@
 ---
 - name: Prepare
   hosts: all
-  become: true
   gather_facts: false
+  tasks:
 
-  roles:
-    - role: robertdebock.bootstrap
+    - name: Install required packages
+      ansible.builtin.package:
+        name:
+          - sudo
+        state: present
