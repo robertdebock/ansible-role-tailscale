@@ -13,7 +13,7 @@ tailscale_advertise_routes: []
 tailscale_authkey: ""
 
 # You can specify a hostname.
-tailscale_hostname: "{{ ansible_hostname }}"
+tailscale_hostname: "{{ ansible_facts['hostname'] }}"
 
 # Whether to accept DNS settings from Tailscale. Set to false when using Pi-hole.
 tailscale_accept_dns: true

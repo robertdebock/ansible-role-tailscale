@@ -10,7 +10,7 @@
     state: present
     key: "{{ tailscale_repo_gpgkey }}"
   when:
-    - ansible_pkg_mgr in [ "yum", "dnf", "zypper", "dnf5" ]
+    - ansible_facts['pkg_mgr'] in [ "yum", "dnf", "zypper", "dnf5" ]
 
 - name: Add the Tailscale repository (yum/dnf)
   ansible.builtin.yum_repository:
@@ -19,15 +19,15 @@
     baseurl: "{{ tailscale_repo_baseurl }}"
     gpgkey: "{{ tailscale_repo_gpgkey }}"
   when:
-    - ansible_pkg_mgr in [ "yum", "dnf", "dnf5" ]
+    - ansible_facts['pkg_mgr'] in [ "yum", "dnf", "dnf5" ]
 
 - name: Run apt tasks
   when:
-    - ansible_pkg_mgr in [ "apt" ]
+    - ansible_facts['pkg_mgr'] in [ "apt" ]
   block:
     - name: Add tailscale repository | sources.list
       when:
-        - (ansible_distribution == "Debian" and ansible_distribution_version is version('13', '<'))
+        - (ansible_facts['distribution'] == "Debian" and ansible_facts['distribution_version'] is version('13', '<'))
           or
           (ansible_distribution == "Ubuntu" and ansible_distribution_version is version('24.04', '<'))
       block:
@@ -44,7 +44,7 @@
 
     - name: Add tailscale repository | deb822
       when:
-        - (ansible_distribution == "Debian" and ansible_distribution_version is version('13', '>='))
+        - (ansible_facts['distribution'] == "Debian" and ansible_facts['distribution_version'] is version('13', '>='))
           or
           (ansible_distribution == "Ubuntu" and ansible_distribution_version is version('24.04', '>='))
       block:
@@ -53,7 +53,7 @@
             name: tailscale
             types: deb
             uris: "{{ tailscale_apt_deb822_uri }}"
-            suites: '{{ ansible_distribution_release }}'
+            suites: "{{ tailscale_apt_deb822_suite }}"
             signed_by: "{{ tailscale_apt_key_url }}"
             components:
               - main
@@ -68,7 +68,7 @@
 
 - name: Run zypper tasks
   when:
-    - ansible_pkg_mgr in [ "zypper" ]
+    - ansible_facts['pkg_mgr'] in [ "zypper" ]
   block:
     - name: Add tailscale repository (zypper)
       community.general.zypper_repository:
@@ -82,7 +82,7 @@
   ansible.builtin.package:
     name: tailscale
   when:
-    - ansible_pkg_mgr not in [ "zypper" ]
+    - ansible_facts['pkg_mgr'] not in [ "zypper" ]
 
 - name: Enable and start the server
   ansible.builtin.service:
