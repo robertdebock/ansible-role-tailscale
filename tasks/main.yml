@@ -29,7 +29,7 @@
       when:
         - (ansible_facts['distribution'] == "Debian" and ansible_facts['distribution_version'] is version('13', '<'))
           or
-          (ansible_distribution == "Ubuntu" and ansible_distribution_version is version('24.04', '<'))
+          (ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_version'] is version('24.04', '<'))
       block:
         - name: Add apt key | sources.list
           ansible.builtin.apt_key:
@@ -46,7 +46,7 @@
       when:
         - (ansible_facts['distribution'] == "Debian" and ansible_facts['distribution_version'] is version('13', '>='))
           or
-          (ansible_distribution == "Ubuntu" and ansible_distribution_version is version('24.04', '>='))
+          (ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_version'] is version('24.04', '>='))
       block:
         - name: Add the Tailscale repository (apt) | deb822
           ansible.builtin.deb822_repository:
